@@ -25,26 +25,29 @@ class MainScene extends Phaser.Scene {
         // 単体画像をシーンに追加(X座標,Y座標,画像名)
         this.add.image(400, 300, 'sky');
 
-        this.player = this.add.image(400,300,'alien1');
+        const player = this.physics.add.sprite(400,300,'alien1');
+        this.player = player
         this.player_direction = 1
     }
     // 毎フレーム実行される繰り返し処理
     update(){
-        // キーボードの情報を取得
         let cursors = this.input.keyboard.createCursorKeys();
-        if (cursors.up.isDown) {
-        //console.log("Up!");
-        this.player.y -= 3;// 上方向に移動
-        } else if (cursors.down.isDown) {
-        //console.log("Down!");
-        this.player.y += 3;// 下方向に移動
-        } else if (cursors.left.isDown) {
-        //console.log("Left!");
-        this.player.x -= 3;// 左方向に移動
-        } else if (cursors.right.isDown) {
-        //console.log("Right!");
-        this.player.x += 3;// 右方向に移動
-        } 
+        if(cursors.up.isDown){
+            console.log("Up!!");
+            this.player.setVelocityY(-200);// 上方向の速度を設定
+        } else if(cursors.down.isDown){
+            console.log("down!!");
+            this.player.setVelocityY(200);// 下方向の速度を設定
+        }else if(cursors.left.isDown){
+            console.log("Left");
+            this.player.setVelocityX(-200);// 左方向の速度を設定
+        }else if(cursors.right.isDown){
+            console.log("Right!!");
+            this.player.setVelocityX(200);// 右方向の速度を設定
+        }else{
+            this.player.setVelocityX(0);// 横方向の速度を0
+            this.player.setVelocityY(0);// 縦方向の速度を0
+        }
     }
 
 }
